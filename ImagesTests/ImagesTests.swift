@@ -6,7 +6,7 @@ final class ImagesTests: XCTestCase {
     
     func testHitDecoderDecodesImage() throws {
         let decoder = JSONDecoder()
-        let image = try decoder.decode(Image.self, from: testImage_195893)
+        let image = try decoder.decode(ImageData.self, from: testImage_195893)
         
         XCTAssertEqual(image.id, 195893)
         XCTAssertEqual(image.preview.absoluteString, "https://cdn.pixabay.com/photo/2013/10/15/09/12/flower-195893_150.jpg")
