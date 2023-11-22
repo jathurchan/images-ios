@@ -1,20 +1,15 @@
 import UIKit
 
-struct Asset: Identifiable {
-    static let noAsset: Asset = Asset(id: "none", image: UIImage(systemName: "photo.badge.arrow.down.fill")!)
-    
-    let id: String  // String of hit id except for noAsset
-    var image: UIImage
-}
-
-struct Hit: Identifiable {
+struct HitImage: Identifiable {
     let id: Int
     let preview: URL
-    let largeImage: URL
+    let large: URL
     let user: String
+    
+    var image: UIImage = placeholderImage
 }
 
-extension Hit: Decodable {
+extension HitImage: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case preview = "previewURL"
@@ -39,13 +34,17 @@ extension Hit: Decodable {
         
         self.id = id
         self.preview = preview
-        self.largeImage = largeImage
+        self.large = largeImage
         self.user = user
     }
 }
 
+extension HitImage {
+    private static let placeholderImage = UIImage(systemName: "photo.badge.arrow.down")!
+}
+
 #if DEBUG
-extension Hit {
-    static let sampleData: [Hit] = try! JSONDecoder().decode(PixabayJSON.self, from: PixabayJSON.sampleData).hits
+extension HitImage {
+    static let sampleData: [HitImage] = try! JSONDecoder().decode(PixabayJSON.self, from: PixabayJSON.sampleData).hits
 }
 #endif

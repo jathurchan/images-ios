@@ -2,7 +2,7 @@ import Foundation
 
 struct PixabayJSON: Decodable {
     
-    private(set) var hits: [Hit] = []
+    private(set) var hits: [HitImage] = []
     
     private enum RootCodingKeys: String, CodingKey {
         case hits
@@ -13,7 +13,7 @@ struct PixabayJSON: Decodable {
         var hitsContainer = try rootContainer.nestedUnkeyedContainer(forKey: .hits)
         
         while !hitsContainer.isAtEnd {
-            if let hit = try? hitsContainer.decode(Hit.self) {
+            if let hit = try? hitsContainer.decode(HitImage.self) {
                 hits.append(hit)
             }
         }

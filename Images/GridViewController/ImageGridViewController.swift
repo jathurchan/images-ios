@@ -11,6 +11,11 @@ class ImageGridViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let layout = createLayout()
+        collectionView.collectionViewLayout = layout
+        
+        let cellRegistration = UICollectionView.CellRegistration(handler: cellRegistrationHandler)
+        
         
     }
     
