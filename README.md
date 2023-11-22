@@ -7,3 +7,9 @@
 5. Created a test collection view to display (ids of hit images)
 6. Started updating the model and the collection view to display images and started 
 implementing the prefetching mechanism to avoid scrolling problems.
+
+---
+
+## Wireframes in Figma
+![GridViewController](/readme/GridViewController.png)
+![DetailViewController](/readme/DetailViewController.png)
