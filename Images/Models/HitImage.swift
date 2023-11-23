@@ -9,6 +9,19 @@ struct HitImage: Identifiable {
     var image: UIImage = placeholderImage
 }
 
+extension [HitImage] {
+    func indexOfHitImage(withId id: HitImage.ID) -> Self.Index {
+        guard let index = firstIndex(where: { $0.id == id }) else {
+            fatalError()
+        }
+        return index
+    }
+}
+
+extension HitImage {
+    private static let placeholderImage = UIImage(systemName: "photo.badge.arrow.down")!
+}
+
 extension HitImage: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -37,10 +50,6 @@ extension HitImage: Decodable {
         self.large = largeImage
         self.user = user
     }
-}
-
-extension HitImage {
-    private static let placeholderImage = UIImage(systemName: "photo.badge.arrow.down")!
 }
 
 #if DEBUG

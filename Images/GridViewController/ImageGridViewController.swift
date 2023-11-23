@@ -3,6 +3,7 @@ import UIKit
 
 class ImageGridViewController: UIViewController {
     var dataSource: DataSource!
+    var hitImages: [HitImage] = HitImage.sampleData
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
