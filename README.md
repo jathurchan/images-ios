@@ -9,3 +9,8 @@
 ## Wireframes in Figma
 ![GridViewController](/readme/GridViewController.png)
 ![DetailViewController](/readme/DetailViewController.png)
+
+---
+
+## v1 - Implemented collection view with custom layout and image caching
+![v1](/readme/v1.png)
