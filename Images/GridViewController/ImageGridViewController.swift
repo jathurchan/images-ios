@@ -17,7 +17,14 @@ class ImageGridViewController: UIViewController {
         
         let cellRegistration = UICollectionView.CellRegistration(handler: cellRegistrationHandler)
         
+        dataSource = DataSource(collectionView: collectionView) {
+        (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: HitImage.ID) in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        }
         
+        updateSnapshot()
+        
+        collectionView.dataSource = dataSource
     }
     
     private func createLayout() -> UICollectionViewLayout {
