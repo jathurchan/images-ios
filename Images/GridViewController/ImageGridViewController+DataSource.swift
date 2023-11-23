@@ -5,11 +5,14 @@ extension ImageGridViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<Int, HitImage.ID>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, HitImage.ID>
     
-    func updateSnapshot() {
+    func updateSnapshot(reloading idsThatChanged: [HitImage.ID] = []) {
         var snapshot = Snapshot()
         snapshot.appendSections([0])
         snapshot.appendItems(HitImage.sampleData.map { $0.id })
-        dataSource.apply(snapshot)
+        if !idsThatChanged.isEmpty {
+            snapshot.reloadItems(idsThatChanged)
+        }
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     func cellRegistrationHandler(
