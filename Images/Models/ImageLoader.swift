@@ -55,6 +55,7 @@ class ImageLoader {
                 DispatchQueue.main.async {
                     block(hit, image)
                 }
+                self.loadingResponses[url]?.remove(at: 0)
             }
         }
         task.resume()
