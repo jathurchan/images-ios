@@ -1,16 +1,16 @@
 import UIKit
 
-struct HitImage: Identifiable {
+struct Hit: Identifiable {
     let id: Int
     let preview: URL
     let large: URL
     let user: String
     
-    var image: UIImage = placeholderImage
+    var image: UIImage = UIImage(systemName: "photo.fill")!
 }
 
-extension [HitImage] {
-    func indexOfHitImage(withId id: HitImage.ID) -> Self.Index {
+extension [Hit] {
+    func indexOfHit(with id: Hit.ID) -> Self.Index {
         guard let index = firstIndex(where: { $0.id == id }) else {
             fatalError()
         }
@@ -18,11 +18,7 @@ extension [HitImage] {
     }
 }
 
-extension HitImage {
-    private static let placeholderImage = UIImage(systemName: "photo.badge.arrow.down")!
-}
-
-extension HitImage: Decodable {
+extension Hit: Decodable {
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case preview = "previewURL"
@@ -51,9 +47,3 @@ extension HitImage: Decodable {
         self.user = user
     }
 }
-
-#if DEBUG
-extension HitImage {
-    static let sampleData: [HitImage] = try! JSONDecoder().decode(PixabayJSON.self, from: PixabayJSON.sampleData).hits
-}
-#endif

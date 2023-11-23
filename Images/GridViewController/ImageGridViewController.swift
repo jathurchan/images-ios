@@ -10,9 +10,7 @@ class ImageGridViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIToolbar!
     
-    var hitImageStore: [HitImage] = HitImage.sampleData
-    
-    fileprivate var prefetchingIndexPathOperations = [IndexPath: AnyCancellable]()
+    var hitsStore: HitStore = HitStore(SampleData.hits)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +18,7 @@ class ImageGridViewController: UIViewController {
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         
-        let cellRegistration = UICollectionView.CellRegistration(handler: cellRegistrationHandler)
-        
-        dataSource = DataSource(collectionView: collectionView) {
-        (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: HitImage.ID) in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-        }
+        configureDataSource()
         
         updateSnapshot()
         
@@ -86,5 +79,4 @@ extension ImageGridViewController: UICollectionViewDataSourcePrefetching {
             fatalError()
         }
     }
-}
-*/
+}*/
