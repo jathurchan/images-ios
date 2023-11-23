@@ -1,13 +1,18 @@
 
 import UIKit
+import Combine
 
 class ImageGridViewController: UIViewController {
+    
     var dataSource: DataSource!
-    var hitImages: [HitImage] = HitImage.sampleData
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIToolbar!
+    
+    var hitImageStore: [HitImage] = HitImage.sampleData
+    
+    fileprivate var prefetchingIndexPathOperations = [IndexPath: AnyCancellable]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,3 +74,17 @@ class ImageGridViewController: UIViewController {
     }
     
 }
+
+/*
+extension ImageGridViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        fatalError("not implemented")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            fatalError()
+        }
+    }
+}
+*/

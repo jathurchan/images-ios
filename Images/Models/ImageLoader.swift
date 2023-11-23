@@ -1,17 +1,19 @@
 import UIKit
 import Foundation
 
-class ImageCache {
+class ImageLoader {
     
-    public static let shared = ImageCache()
+    public static let shared = ImageLoader()
     private let cachedImages = NSCache<NSURL, UIImage>()
     private var loadingResponses = [NSURL: [(HitImage, UIImage?) -> Void]]()
     
-    func image(url: NSURL) -> UIImage? {
+    private var imageDownloadingTasks = [HitImage.ID: URLSessionDataTask]()
+    
+    private func image(url: NSURL) -> UIImage? {
         return cachedImages.object(forKey: url)
     }
     
-    func load(url: NSURL, hit: HitImage, completionHandler: @escaping (HitImage, UIImage?) -> Void) {
+    func loadImage(url: NSURL, hit: HitImage, completionHandler: @escaping (HitImage, UIImage?) -> Void) {
         // Retrive cached image if possible
         if let cachedImage = image(url: url) {
             DispatchQueue.main.async {
@@ -20,7 +22,7 @@ class ImageCache {
             return
         }
         
-        // request already made?
+        // request already made by any other with another completion handler?
         if loadingResponses[url] != nil {
             loadingResponses[url]?.append(completionHandler)
             return
@@ -28,13 +30,21 @@ class ImageCache {
             loadingResponses[url] = [completionHandler]
         }
         
-        let task = URLSession.shared.dataTask(with: url as URL) { data, response, error in
+        // Confirm a task to download the image not already started?
+        guard imageDownloadingTasks[hit.id] == nil else { return }
+        
+        let task = URLSession.shared.dataTask(with: url as URL) { [unowned self] (data, response, error) in
+            
+            // Remove the image downloading task
+            imageDownloadingTasks[hit.id] = nil
+            
             guard let data,
                   let image = UIImage(data: data),
                   let blocks = self.loadingResponses[url],
                   error == nil else {
+                
                 DispatchQueue.main.async {
-                    completionHandler(hit, nil)
+                    completionHandler(hit, nil) // failed
                 }
                 return
             }
@@ -48,5 +58,12 @@ class ImageCache {
             }
         }
         task.resume()
+        
+        // Add the image downloading task to enable cancelling (prefetching...)
+        imageDownloadingTasks[hit.id] = task
+    }
+    
+    func cancelImageDownloadingTask(for hitImageId: HitImage.ID) {
+        imageDownloadingTasks.removeValue(forKey: hitImageId)?.cancel()
     }
 }

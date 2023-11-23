@@ -21,12 +21,13 @@ extension ImageGridViewController {
         let hitImage = HitImage.sampleData[indexPath.item]
         var contentConfiguration = cell.hitImageConfiguration()
         contentConfiguration.image = hitImage.image
+        
         cell.contentConfiguration = contentConfiguration
     }
     
     func hitImage(withId id: HitImage.ID) -> HitImage {
-        let index = hitImages.indexOfHitImage(withId: id)
-        return hitImages[index]
+        let index = hitImageStore.indexOfHitImage(withId: id)
+        return hitImageStore[index]
     }
     
 }
