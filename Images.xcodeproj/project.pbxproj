@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		453E36F42B0FC1A900A773F1 /* PixabayClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E36F32B0FC1A900A773F1 /* PixabayClient.swift */; };
 		455997682B0E73B000730596 /* HitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455997672B0E73B000730596 /* HitError.swift */; };
 		455997712B0EA4DC00730596 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455997702B0EA4DC00730596 /* ImageCache.swift */; };
 		455997782B0F36DA00730596 /* HitImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455997772B0F36DA00730596 /* HitImageContentView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		453E36F32B0FC1A900A773F1 /* PixabayClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayClient.swift; sourceTree = "<group>"; };
 		455997672B0E73B000730596 /* HitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitError.swift; sourceTree = "<group>"; };
 		455997702B0EA4DC00730596 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		455997772B0F36DA00730596 /* HitImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitImageContentView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				455997672B0E73B000730596 /* HitError.swift */,
 				4577DE102B0E0B1B00F7A485 /* Hit.swift */,
 				4577DDFC2B0D07A300F7A485 /* PixabayJSON.swift */,
+				453E36F32B0FC1A900A773F1 /* PixabayClient.swift */,
 				455997702B0EA4DC00730596 /* ImageCache.swift */,
 				455997802B0F9B6F00730596 /* SampleData.swift */,
 			);
@@ -269,6 +272,7 @@
 				4577DDD12B0CFB6400F7A485 /* AppDelegate.swift in Sources */,
 				455997682B0E73B000730596 /* HitError.swift in Sources */,
 				4577DDFD2B0D07A300F7A485 /* PixabayJSON.swift in Sources */,
+				453E36F42B0FC1A900A773F1 /* PixabayClient.swift in Sources */,
 				4577DE0B2B0E04E600F7A485 /* ImageGridViewController.swift in Sources */,
 				4577DDD32B0CFB6400F7A485 /* SceneDelegate.swift in Sources */,
 				4559977D2B0F9B6000730596 /* HitStore.swift in Sources */,
