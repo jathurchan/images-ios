@@ -12,5 +12,7 @@
 
 ---
 
-## v1 - Implemented collection view with custom layout and image caching
+## v1 - Implemented collection view with custom layout and image loading and caching
 ![v1](/readme/v1.png)
+
+## v2 - Implemented a Hit provider that fetches Hit data from Pixabay supporting pages
