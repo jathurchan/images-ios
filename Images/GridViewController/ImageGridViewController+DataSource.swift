@@ -15,7 +15,9 @@ extension ImageGridViewController {
             var contentConfiguration = cell.hitImageConfiguration()
             contentConfiguration.image = hit.image
             
-            ImageCache.shared.loadImage(url: hit.preview as NSURL, hitId: hitId) { hitId, loadedImage in
+            ImageCache.shared.loadImage(url: hit.preview as NSURL, hitId: hitId) { [weak self] hitId, loadedImage in
+                
+                guard let self = self else { return }
                 
                 if let image = loadedImage {
                     var updatedSnapshot = self.dataSource.snapshot()
