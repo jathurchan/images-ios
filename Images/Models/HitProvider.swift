@@ -15,7 +15,7 @@ class HitProvider {
     private var pageToLoad: Int!
     private let perPage: Int = HitProvider.hitsToLoadPerPage
     
-    func loadFirstPageData(for query: String = "", _ completion: @escaping ([Hit], HitError?) -> Void) {
+    func loadFirstPageData(for query: String = "", _ completion: @escaping ([Hit.ID], HitError?) -> Void) {
         
         guard self.query != query else {
             return  // No need to reload
@@ -32,7 +32,7 @@ class HitProvider {
         loadPageData(query: query, page: pageToLoad, perPage: HitProvider.hitsToLoadPerPage, completion)
     }
     
-    func loadNextPageData(_ completion: @escaping ([Hit]?, HitError?) -> Void) {
+    func loadNextPageData(_ completion: @escaping ([Hit.ID], HitError?) -> Void) {
         if !isLoadingNewPage && canLoadNextPage {
             if let query,
                let pageToLoad {
@@ -41,7 +41,7 @@ class HitProvider {
         }
     }
     
-    private func loadPageData(query: String, page: Int, perPage: Int, _ completion: @escaping ([Hit], HitError?) -> Void) {
+    private func loadPageData(query: String, page: Int, perPage: Int, _ completion: @escaping ([Hit.ID], HitError?) -> Void) {
         loadingPageTask = client.loadHits(query: query, page: page, perPage: perPage, { [unowned self] loadedHits, hitError in
             
             self.loadingPageTask = nil  // enable loading new pages
@@ -59,7 +59,7 @@ class HitProvider {
             
             self.hits.append(contentsOf: loadedHits)
             
-            completion(loadedHits, nil)
+            completion(loadedHits.map { $0.id }, nil)
             
         })
     }

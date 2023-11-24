@@ -26,6 +26,8 @@ class ImageGridViewController: UIViewController {
         
         collectionView.dataSource = dataSource
         
+        searchBar.delegate = self
+        collectionView.delegate = self
         
     }
     
@@ -69,18 +71,14 @@ class ImageGridViewController: UIViewController {
         
         return layout
     }
-    
 }
 
-/*
-extension ImageGridViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        fatalError("not implemented")
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            fatalError()
+extension ImageGridViewController: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= (scrollView.contentSize.height - 3 * scrollView.frame.size.height) {
+            hitsStore.loadNextPageData { [unowned self] hitsIds, hitError in
+                self.updateSnapshot(reloading: hitsIds)
+            }
         }
     }
-}*/
+}
