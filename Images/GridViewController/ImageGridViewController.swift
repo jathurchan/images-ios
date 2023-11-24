@@ -26,7 +26,7 @@ class ImageGridViewController: UIViewController {
         
         collectionView.dataSource = dataSource
         
-        searchBar.delegate = self
+        // searchBar.delegate = self
         collectionView.delegate = self
         
     }
