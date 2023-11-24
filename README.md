@@ -16,3 +16,5 @@
 ![v1](/readme/v1.png)
 
 ## v2 - Implemented a Hit provider that fetches Hit data from Pixabay supporting pages
+
+## v3 - Implemented fetching new pages with scrolling
