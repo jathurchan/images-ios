@@ -30,6 +30,8 @@ class ImageGridViewController: UIViewController {
         collectionView.dataSource = dataSource
         collectionView.keyboardDismissMode = .onDrag
         
+        collectionView.allowsMultipleSelection = true
+        
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -82,6 +84,18 @@ extension ImageGridViewController: UICollectionViewDelegate {
             }
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let hitId = self.dataSource.itemIdentifier(for: indexPath) {
+            self.updateSnapshot(reloading: [hitId])
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let hitId = self.dataSource.itemIdentifier(for: indexPath) {
+            self.updateSnapshot(reloading: [hitId])
+        }
+    }
 }
 
 extension ImageGridViewController: UISearchBarDelegate {
@@ -92,11 +106,18 @@ extension ImageGridViewController: UISearchBarDelegate {
                 self.updateSnapshot(reloading: hitsIds)
             }
         }
+        clearSelectedItems(animated: false)
         self.searchBar.endEditing(true)
         scrollToTop()
     }
     
     private func scrollToTop() {
-        self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    }
+    
+    private func clearSelectedItems(animated: Bool) {
+        collectionView.indexPathsForSelectedItems?.forEach({ (indexPath) in
+            collectionView.deselectItem(at: indexPath, animated: animated)
+        })
     }
 }
