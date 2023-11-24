@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		450210292B10ECB6001EE8F9 /* ImageGridViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450210282B10ECB6001EE8F9 /* ImageGridViewController+Actions.swift */; };
+		4502102B2B1104E2001EE8F9 /* ImagesViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4502102A2B1104E2001EE8F9 /* ImagesViewController+DataSource.swift */; };
 		453E36F42B0FC1A900A773F1 /* PixabayClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E36F32B0FC1A900A773F1 /* PixabayClient.swift */; };
 		455997682B0E73B000730596 /* HitError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455997672B0E73B000730596 /* HitError.swift */; };
 		455997712B0EA4DC00730596 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455997702B0EA4DC00730596 /* ImageCache.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		450210282B10ECB6001EE8F9 /* ImageGridViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageGridViewController+Actions.swift"; sourceTree = "<group>"; };
+		4502102A2B1104E2001EE8F9 /* ImagesViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagesViewController+DataSource.swift"; sourceTree = "<group>"; };
 		453E36F32B0FC1A900A773F1 /* PixabayClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayClient.swift; sourceTree = "<group>"; };
 		455997672B0E73B000730596 /* HitError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitError.swift; sourceTree = "<group>"; };
 		455997702B0EA4DC00730596 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			children = (
 				4577DE0A2B0E04E600F7A485 /* ImageGridViewController.swift */,
 				4577DE0E2B0E079600F7A485 /* ImageGridViewController+DataSource.swift */,
+				450210282B10ECB6001EE8F9 /* ImageGridViewController+Actions.swift */,
 			);
 			path = GridViewController;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				4577DE0C2B0E055B00F7A485 /* ImagesViewController.swift */,
+				4502102A2B1104E2001EE8F9 /* ImagesViewController+DataSource.swift */,
 			);
 			path = DetailViewController;
 			sourceTree = "<group>";
@@ -269,7 +275,9 @@
 				4577DE112B0E0B1B00F7A485 /* Hit.swift in Sources */,
 				455997712B0EA4DC00730596 /* ImageCache.swift in Sources */,
 				455997782B0F36DA00730596 /* HitImageContentView.swift in Sources */,
+				450210292B10ECB6001EE8F9 /* ImageGridViewController+Actions.swift in Sources */,
 				4577DDD12B0CFB6400F7A485 /* AppDelegate.swift in Sources */,
+				4502102B2B1104E2001EE8F9 /* ImagesViewController+DataSource.swift in Sources */,
 				455997682B0E73B000730596 /* HitError.swift in Sources */,
 				4577DDFD2B0D07A300F7A485 /* PixabayJSON.swift in Sources */,
 				453E36F42B0FC1A900A773F1 /* PixabayClient.swift in Sources */,
