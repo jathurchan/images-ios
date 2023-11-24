@@ -10,7 +10,7 @@ class ImageGridViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIToolbar!
     
-    var hitsStore: HitStore = HitStore(SampleData.hits)
+    var hitsStore: HitProvider = HitProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +20,13 @@ class ImageGridViewController: UIViewController {
         
         configureDataSource()
         
-        updateSnapshot()
+        hitsStore.loadFirstPageData { [unowned self] hitIds, hitError in
+            updateSnapshot()
+        }
         
         collectionView.dataSource = dataSource
+        
+        
     }
     
     private func createLayout() -> UICollectionViewLayout {

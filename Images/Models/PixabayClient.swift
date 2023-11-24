@@ -8,8 +8,7 @@ class PixabayClient {
     
     private lazy var decoder: JSONDecoder = JSONDecoder()
     
-    @discardableResult
-    func loadHits(query: String?, page: Int?, perPage: Int?, completion: @escaping ([Hit]?, HitError?) -> Void) -> URLSessionDataTask? {
+    func loadHits(query: String = "", page: Int?, perPage: Int?, _ completion: @escaping ([Hit], HitError?) -> Void) -> URLSessionDataTask? {
         let url = buildUrl(query: query, page: page, perPage: perPage)
         
         let task = URLSession.shared.dataTask(with: url as URL) { [unowned self] (data, response, _) in
@@ -17,19 +16,26 @@ class PixabayClient {
             guard let data,
                   let response = response as? HTTPURLResponse,
                   validStatus.contains(response.statusCode) else {
-                
-                completion(nil, HitError.networkError)
+                DispatchQueue.main.async {
+                    completion([], HitError.networkError)
+                }
                 return
             }
             
             do {
                 let pixabayJSON: PixabayJSON = try self.decoder.decode(PixabayJSON.self, from: data)
-                completion(pixabayJSON.hits, nil)   // Success
+                DispatchQueue.main.async {
+                    completion(pixabayJSON.hits, nil)   // Success
+                }
                 
             } catch HitError.missingData {
-                completion(nil, .missingData)
+                DispatchQueue.main.async {
+                    completion([], .missingData)
+                }
             } catch let error {
-                completion(nil, HitError.unexpectedError(Error: error))
+                DispatchQueue.main.async {
+                    completion([], HitError.unexpectedError(Error: error))
+                }
             }
         }
         
@@ -41,8 +47,9 @@ class PixabayClient {
     private func buildUrl(query: String?, page: Int?, perPage: Int?) -> URL {
         var queryItems: [URLQueryItem] = [URLQueryItem(name: "key", value: PixabayClient.apiKey)]
         
-        if let filter = query?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-            queryItems.append(URLQueryItem(name: "q", value: filter))
+        if let query = query?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+           query != "" {
+            queryItems.append(URLQueryItem(name: "q", value: query))
         }
         if let page {
             queryItems.append(URLQueryItem(name: "page", value: String(page)))
