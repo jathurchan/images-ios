@@ -7,6 +7,7 @@
 5. Implemented a image loader (with caching)
 6. Implemented PixabayClient and HitProvider to provide data (with search and pages support to enable infinite scrolling)
 7. Enabled search and infinite scrolling (by fetching pages with scroll...)
+8. Implemented selecting and deselecting multiple images in the collection view
 
 ---
 
