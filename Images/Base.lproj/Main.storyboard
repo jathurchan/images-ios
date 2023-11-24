@@ -25,9 +25,7 @@
                             </searchBar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qzl-nE-Qpv">
                                 <rect key="frame" x="0.0" y="774" width="393" height="44"/>
-                                <items>
-                                    <barButtonItem title="Item" id="dBo-YF-SJt"/>
-                                </items>
+                                <items/>
                             </toolbar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="64D-Ui-0yk">
                                 <rect key="frame" x="0.0" y="115" width="393" height="654"/>

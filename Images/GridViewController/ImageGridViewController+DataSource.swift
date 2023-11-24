@@ -11,11 +11,13 @@ extension ImageGridViewController {
             if let hit = self.hit(with: hitId) {
                 var contentConfiguration = cell.hitImageConfiguration()
                 contentConfiguration.image = hit.image
-                cell.contentConfiguration = contentConfiguration
+                contentConfiguration.isSelected = cell.isSelected
                 
+                cell.contentConfiguration = contentConfiguration
                 ImageCache.shared.loadImage(url: hit.preview as NSURL, hitId: hitId) { hitId, loadedImage in
                     if let loadedImage {
                         contentConfiguration.image = loadedImage
+                        contentConfiguration.isSelected = cell.isSelected
                         cell.contentConfiguration = contentConfiguration
                     }
                 }
