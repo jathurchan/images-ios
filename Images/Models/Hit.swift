@@ -1,7 +1,8 @@
 import UIKit
 
 struct Hit: Identifiable {
-    let id: Int
+    let id: UUID = UUID()
+    let code: Int
     let preview: URL
     let large: URL
     let user: String
@@ -20,7 +21,7 @@ extension [Hit] {
 
 extension Hit: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case code = "id"
         case preview = "previewURL"
         case largeImage = "largeImageURL"
         case user = "user"
@@ -28,12 +29,12 @@ extension Hit: Decodable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        let rawId = try? values.decode(Int.self, forKey: .id)
+        let rawCode = try? values.decode(Int.self, forKey: .code)
         let rawPreview = try? values.decode(URL.self, forKey: .preview)
         let rawLargeImage = try? values.decode(URL.self, forKey: .largeImage)
         let rawUser = try? values.decode(String.self, forKey: .user)
         
-        guard let id = rawId,
+        guard let code = rawCode,
               let preview = rawPreview,
               let largeImage = rawLargeImage,
               let user = rawUser
@@ -41,7 +42,7 @@ extension Hit: Decodable {
             throw HitError.missingData
         }
         
-        self.id = id
+        self.code = code
         self.preview = preview
         self.large = largeImage
         self.user = user

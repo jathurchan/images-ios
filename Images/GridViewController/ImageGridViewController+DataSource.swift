@@ -6,31 +6,21 @@ extension ImageGridViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Int, Hit.ID>
     
     func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Hit.ID> { [weak self] cell, indexPath, hitId in
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Hit.ID> { [unowned self] cell, indexPath, hitId in
             
-            guard let self = self else { return }
-            
-            let hit = hit(with: hitId)
+            let hit = self.hit(with: hitId)
             
             var contentConfiguration = cell.hitImageConfiguration()
             contentConfiguration.image = hit.image
-            
-            ImageCache.shared.loadImage(url: hit.preview as NSURL, hitId: hitId) { [weak self] hitId, loadedImage in
-                
-                guard let self = self else { return }
-                
-                if let image = loadedImage {
-                    var updatedSnapshot = self.dataSource.snapshot()
-                    if let dataSourceIndex = updatedSnapshot.indexOfItem(hitId) {
-                        self.hitsStore.hits[dataSourceIndex].image = image
-                        updatedSnapshot.reconfigureItems([hitId])
-                        self.dataSource.apply(updatedSnapshot, animatingDifferences: true)
-                    }
-                }
-            }
-            
             cell.contentConfiguration = contentConfiguration
             
+            ImageCache.shared.loadImage(url: hit.preview as NSURL, hitId: hitId) { hitId, loadedImage in
+                
+                if let loadedImage {
+                    contentConfiguration.image = loadedImage
+                    cell.contentConfiguration = contentConfiguration
+                }
+            }
         }
         
         dataSource = DataSource(collectionView: collectionView) {
