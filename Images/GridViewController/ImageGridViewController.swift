@@ -32,6 +32,7 @@ class ImageGridViewController: UIViewController {
         
         collectionView.allowsMultipleSelection = true
         
+        configureToolbar()
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -74,6 +75,34 @@ class ImageGridViewController: UIViewController {
         
         return layout
     }
+    
+    private func configureToolbar() {
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didPressCancelButton))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didPressDoneButton))
+        
+        toolBar.setItems([cancelButton, spacer,  doneButton], animated: false)
+        
+        updateToolbarButtons()
+    }
+    
+    func updateToolbarButtons() {
+        if let indexPaths = collectionView.indexPathsForSelectedItems,
+           !indexPaths.isEmpty {
+            
+            toolBar.items?[0].isEnabled = true  // Cancel button
+            
+            if indexPaths.count >= 2 {
+                toolBar.items?[2].isEnabled = true  // Done button
+            } else {
+                toolBar.items?[2].isEnabled = false // Done button
+            }
+            
+        } else {
+            toolBar.items?[0].isEnabled = false // Cancel button
+            toolBar.items?[2].isEnabled = false // Done button
+        }
+    }
 }
 
 extension ImageGridViewController: UICollectionViewDelegate {
@@ -86,15 +115,21 @@ extension ImageGridViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if let hitId = self.dataSource.itemIdentifier(for: indexPath) {
             self.updateSnapshot(reloading: [hitId])
         }
+        
+        updateToolbarButtons()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
         if let hitId = self.dataSource.itemIdentifier(for: indexPath) {
             self.updateSnapshot(reloading: [hitId])
         }
+        
+        updateToolbarButtons()
     }
 }
 
@@ -111,13 +146,16 @@ extension ImageGridViewController: UISearchBarDelegate {
         scrollToTop()
     }
     
-    private func scrollToTop() {
-        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    func clearSelectedItems(animated: Bool = false) {
+        if let indexPaths = collectionView.indexPathsForSelectedItems {
+            indexPaths.forEach { (indexPath) in
+                collectionView.deselectItem(at: indexPath, animated: animated)
+            }
+            self.updateSnapshot(reloading: indexPaths.compactMap { self.dataSource.itemIdentifier(for: $0) })
+        }
     }
     
-    private func clearSelectedItems(animated: Bool) {
-        collectionView.indexPathsForSelectedItems?.forEach({ (indexPath) in
-            collectionView.deselectItem(at: indexPath, animated: animated)
-        })
+    private func scrollToTop() {
+        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     }
 }
