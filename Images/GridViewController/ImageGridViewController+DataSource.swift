@@ -8,17 +8,16 @@ extension ImageGridViewController {
     func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, Hit.ID> { [unowned self] cell, indexPath, hitId in
             
-            let hit = self.hit(with: hitId)
-            
-            var contentConfiguration = cell.hitImageConfiguration()
-            contentConfiguration.image = hit.image
-            cell.contentConfiguration = contentConfiguration
-            
-            ImageCache.shared.loadImage(url: hit.preview as NSURL, hitId: hitId) { hitId, loadedImage in
+            if let hit = self.hit(with: hitId) {
+                var contentConfiguration = cell.hitImageConfiguration()
+                contentConfiguration.image = hit.image
+                cell.contentConfiguration = contentConfiguration
                 
-                if let loadedImage {
-                    contentConfiguration.image = loadedImage
-                    cell.contentConfiguration = contentConfiguration
+                ImageCache.shared.loadImage(url: hit.preview as NSURL, hitId: hitId) { hitId, loadedImage in
+                    if let loadedImage {
+                        contentConfiguration.image = loadedImage
+                        cell.contentConfiguration = contentConfiguration
+                    }
                 }
             }
         }
@@ -29,9 +28,11 @@ extension ImageGridViewController {
         }
     }
     
-    func hit(with id: Hit.ID) -> Hit {
-        let index = hitsStore.hits.indexOfHit(with: id)
-        return hitsStore.hits[index]
+    func hit(with id: Hit.ID) -> Hit? {
+        if let index = hitsStore.hits.indexOfHit(with: id) {
+            return hitsStore.hits[index]
+        }
+        return nil
     }
     
     func updateSnapshot(reloading idsThatChanged: [Hit.ID] = []) {
