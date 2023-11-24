@@ -136,12 +136,13 @@ extension ImageGridViewController: UICollectionViewDelegate {
 extension ImageGridViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
-            print(text)
+            clearSelectedItems(animated: false)
+            updateToolbarButtons()
+            
             hitsStore.loadFirstPageData(for: text) { [unowned self] hitsIds, hitError in
                 self.updateSnapshot(reloading: hitsIds)
             }
         }
-        clearSelectedItems(animated: false)
         self.searchBar.endEditing(true)
         scrollToTop()
     }
