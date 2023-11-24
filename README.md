@@ -1,20 +1,15 @@
 # Images iOS app
 
-1. Defined the UI using Figma
-2. Implemented models and defined decoding strategies to decode JSON response received from Pixabay API
-3. Implemented a collection view with custom layout to show fetched images
+1. Designed the UI using Figma
+2. Implemented models, decoding strategies and tests to test the decoder
+3. Defined the `ImageGridViewController` using storyboard (main view controller with a search bar, collection view, and a toolbar).
+4. Implemented the colleciton with custom layout and custom content view (for cell registration)
+5. Implemented a image loader (with caching)
+6. Implemented PixabayClient and HitProvider to provide data (with search and pages support to enable infinite scrolling)
+7. Enabled search and infinite scrolling (by fetching pages with scroll...)
 
 ---
 
 ## Wireframes in Figma
 ![GridViewController](/readme/GridViewController.png)
 ![DetailViewController](/readme/DetailViewController.png)
-
----
-
-## v1 - Implemented collection view with custom layout and image loading and caching
-![v1](/readme/v1.png)
-
-## v2 - Implemented a Hit provider that fetches Hit data from Pixabay supporting pages
-
-## v3 - Implemented fetching new pages with scrolling
