@@ -18,7 +18,7 @@ class ImageGridViewController: UIViewController {
         let layout = createLayout()
         collectionView.collectionViewLayout = layout
         
-        // searchBar.delegate = self
+        searchBar.delegate = self
         collectionView.delegate = self
         
         configureDataSource()
@@ -83,17 +83,20 @@ extension ImageGridViewController: UICollectionViewDelegate {
         }
     }
 }
-/*
- extension ImageGridViewController: UISearchBarDelegate {
- func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
- if let text = searchBar.text {
- hitsStore.loadFirstPageData(for: text) { [unowned self] hitsIds, hitError in
- collectionView.reloadData()
- updateSnapshot()
- }
- }
- 
- self.searchBar.endEditing(true)
- }
- }
- */
+
+extension ImageGridViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            print(text)
+            hitsStore.loadFirstPageData(for: text) { [unowned self] hitsIds, hitError in
+                self.updateSnapshot(reloading: hitsIds)
+            }
+        }
+        self.searchBar.endEditing(true)
+        scrollToTop()
+    }
+    
+    private func scrollToTop() {
+        self.collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    }
+}

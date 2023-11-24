@@ -11,11 +11,8 @@ struct Hit: Identifiable {
 }
 
 extension [Hit] {
-    func indexOfHit(with id: Hit.ID) -> Self.Index {
-        guard let index = firstIndex(where: { $0.id == id }) else {
-            fatalError()
-        }
-        return index
+    func indexOfHit(with id: Hit.ID) -> Self.Index? {
+        return firstIndex(where: { $0.id == id })
     }
 }
 
