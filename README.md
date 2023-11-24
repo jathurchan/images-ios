@@ -5,7 +5,7 @@
 3. Defined the `ImageGridViewController` using storyboard (main view controller with a search bar, collection view, and a toolbar).
 4. Implemented the collection view with custom layout and custom content view (for cell registration)
 5. Implemented a image loader (with caching)
-6. Implemented PixabayClient and HitProvider to provide data (with search and pages support to enable infinite scrolling)
+6. Implemented PixabayClient and HitProvider to provide data
 7. Enabled search and infinite scrolling (by fetching pages with scroll...)
 8. Implemented selecting and deselecting multiple images in the collection view
 8. Implemented toolbar with items that become active only in appropriate situations.
