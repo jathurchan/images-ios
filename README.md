@@ -15,14 +15,14 @@
 ---
 
 ## Wireframes in Figma
-![GridViewController](/readme/GridViewController.png)
-![DetailViewController](/readme/DetailViewController.png)
+![GridViewController](/res/GridViewController.png)
+![DetailViewController](/res/DetailViewController.png)
 
 ---
 
 ## A Few Screenshots
-![No query made](/readme/1.png)
-![One item selected](/readme/2.png)
-![Two Items selected](/readme/3.png)
-![Detail View](/readme/4.png)
-![Search](/readme/5.png)
+![No query made](/res/1.png)
+![One item selected](/res/2.png)
+![Two Items selected](/res/3.png)
+![Detail View](/res/4.png)
+![Search](/res/5.png)

@@ -48,8 +48,6 @@ class ImageCache {
                 return
             }
             
-            
-            
             self.cachedImages.setObject(image, forKey: url, cost: data.count)
             
             for block in blocks {
@@ -67,7 +65,7 @@ class ImageCache {
     }
     
     func cancelImageDownloadingTask(for hitImageId: Hit.ID) {
-        fatalError()
+        fatalError("not implemented")
         // imageDownloadingTasks.removeValue(forKey: hitImageId)?.cancel()
     }
 }
