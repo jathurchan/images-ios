@@ -3,7 +3,7 @@
 ### Search & Select Multiple Images
 ![Search & select multiple images](/res/multiple/multiple_q_multiple_selected.png)
 
-### Scroll Endlessly With Async Image Loading and Caching
+### Scroll Endlessly With Continuous Content Fetching, Async Image Loading and Caching
 ![Scroll endlessly with async image loading and caching](/res/multiple/multiple_q_loading.png)
 
 ---
