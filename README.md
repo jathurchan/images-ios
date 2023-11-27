@@ -4,7 +4,7 @@
 ![Search & select multiple images](/res/multiple/multiple_q_multiple_selected.png)
 
 ### Scroll Endlessly With Async Image Loading and Caching
-![Scroll endlessly with no hitches](/res/multiple/multiple_q_loading.png)
+![Scroll endlessly with async image loading and caching](/res/multiple/multiple_q_loading.png)
 
 ---
 
@@ -25,12 +25,3 @@
 ## Wireframes in Figma
 ![GridViewController](/res/GridViewController.png)
 ![DetailViewController](/res/DetailViewController.png)
-
----
-
-## A Few Screenshots
-![No query made](/res/1.png)
-![One item selected](/res/2.png)
-![Two Items selected](/res/3.png)
-![Detail View](/res/4.png)
-![Search](/res/5.png)
