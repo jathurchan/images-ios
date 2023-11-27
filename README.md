@@ -3,6 +3,9 @@
 ### Search & Select Multiple Images
 ![Search & select multiple images](/res/multiple/multiple_q_multiple_selected.png)
 
+### Scroll Endlessly With Async Image Loading and Caching
+![Scroll endlessly with no hitches](/res/multiple/multiple_q_loading.png)
+
 ---
 
 1. Designed the UI using Figma
