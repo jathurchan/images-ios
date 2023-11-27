@@ -12,6 +12,10 @@ class ImageGridViewController: UIViewController {
     
     var hitsStore: HitProvider = HitProvider()
     
+    private let cancelButtonIndex = 0
+    private let selectedLabelButton = 2
+    private let doneButtonIndex = 4
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,28 +84,40 @@ class ImageGridViewController: UIViewController {
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didPressCancelButton))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didPressDoneButton))
+        let selectedLabelButton = UIBarButtonItem(customView: UILabel())
         
-        toolBar.setItems([cancelButton, spacer,  doneButton], animated: false)
+        toolBar.setItems([cancelButton, spacer, selectedLabelButton, spacer, doneButton], animated: false)
         
         updateToolbarButtons()
     }
     
     func updateToolbarButtons() {
+        let selectedLabel = UILabel()
+        selectedLabel.font = .preferredFont(forTextStyle: .headline)
+        
         if let indexPaths = collectionView.indexPathsForSelectedItems,
            !indexPaths.isEmpty {
             
-            toolBar.items?[0].isEnabled = true  // Cancel button
+            toolBar.items?[cancelButtonIndex].isEnabled = true
+            
+            selectedLabel.text = "\(indexPaths.count) "
             
             if indexPaths.count >= 2 {
-                toolBar.items?[2].isEnabled = true  // Done button
+                toolBar.items?[doneButtonIndex].isEnabled = true
+                selectedLabel.text! += "Images Selected"
             } else {
-                toolBar.items?[2].isEnabled = false // Done button
+                toolBar.items?[doneButtonIndex].isEnabled = false
+                selectedLabel.text! += "Image Selected"
             }
             
         } else {
-            toolBar.items?[0].isEnabled = false // Cancel button
-            toolBar.items?[2].isEnabled = false // Done button
+            toolBar.items?[cancelButtonIndex].isEnabled = false
+            toolBar.items?[doneButtonIndex].isEnabled = false
+            
+            selectedLabel.text = "Select Images"
         }
+        
+        toolBar.items?[selectedLabelButton].customView = selectedLabel
     }
 }
 
