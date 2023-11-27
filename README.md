@@ -1,7 +1,7 @@
 # Images App (iOS)
 
-### Search & select multiple images
-![Search & Select multiple images](/res/multiple/multiple_q_multiple_selected.png)
+### Search & Select Multiple Images
+![Search & select multiple images](/res/multiple/multiple_q_multiple_selected.png)
 
 ---
 
