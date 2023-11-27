@@ -1,4 +1,9 @@
-# Images iOS app
+# Images App (iOS)
+
+### Search & select multiple images
+![Search & Select multiple images](/res/multiple/multiple_q_multiple_selected.png)
+
+---
 
 1. Designed the UI using Figma
 2. Implemented models, decoding strategies and tests to test the decoder
