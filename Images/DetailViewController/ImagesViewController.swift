@@ -55,9 +55,9 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
             imageView.topAnchor.constraint(equalTo: imageController.view.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: imageController.view.bottomAnchor)])
         
-        imageView.image = hit.image
+        imageView.image = hit.asset
         
-        ImageCache.shared.loadImage(url: hit.preview as NSURL, hitId: hit.id) { hitId, loadedImage in
+        ImageCache.shared.loadImage(url: hit.webFormat as NSURL, hitId: hit.id) { hitId, loadedImage in
             if let loadedImage {
                 imageView.image = loadedImage
             }
