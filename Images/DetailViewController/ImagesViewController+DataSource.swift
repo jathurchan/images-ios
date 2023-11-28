@@ -6,7 +6,7 @@ extension ImagesViewController: UIPageViewControllerDataSource {
             if index > 0 {
                 return imageControllers[index - 1]
             } else {
-                return nil
+                return imageControllers[imageControllers.count-1]
             }
         }
         
@@ -18,7 +18,7 @@ extension ImagesViewController: UIPageViewControllerDataSource {
             if index < imageControllers.count - 1 {
                 return imageControllers[index + 1]
             } else {
-                return nil
+                return imageControllers[0]
             }
         }
 

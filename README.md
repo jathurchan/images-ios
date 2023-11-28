@@ -1,16 +1,19 @@
 # Images App (iOS)
 
 ### Search & Select Multiple Images
-Search for images using the Pixabay API, which gives you access to over 2 million images. Select as many images as you like from the results.
+Search for images using the Pixabay API, which gives you access to over 2 million images. Select as many images as you like from the search results.
 
 ![Search & select multiple images](/res/multiple/multiple_q_multiple_selected.png)
 
 
 ### Scroll Endlessly
-Scroll endlessly without any hitches thanks to automatic content retrieval, asynchronous image loading and caching.
+Scroll endlessly without a hitch thanks to automatic content retrieval, asynchronous image loading and caching.
 
 ![Scroll endlessly with async image loading and caching](/res/multiple/multiple_q_loading.png)
 
+
+## View Selected Images in a Slideshow
+View the selected images (at least 2) in a slideshow or by scrolling horizontally.
 
 ---
 
