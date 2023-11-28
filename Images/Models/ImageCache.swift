@@ -7,6 +7,7 @@ class ImageCache {
     private let cachedImages = NSCache<NSURL, UIImage>()
     private var loadingResponses = [NSURL: [(Hit.ID, UIImage?) -> Void]]()
     
+    
     // private var imageDownloadingTasks = [Hit.ID: URLSessionDataTask]()
     
     private func image(url: NSURL) -> UIImage? {
