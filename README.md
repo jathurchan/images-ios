@@ -1,5 +1,7 @@
 # Images App (iOS)
 
+## Features
+
 ### Search & Select Multiple Images
 Search for images using the Pixabay API, which gives you access to over 2 million images. Select as many images as you like from the search results.
 
@@ -9,13 +11,14 @@ Search for images using the Pixabay API, which gives you access to over 2 millio
 ### Scroll Endlessly
 Scroll endlessly without a hitch thanks to automatic content retrieval, asynchronous image loading and caching.
 
-![Scroll endlessly with async image loading and caching](/res/multiple/multiple_q_loading.png)
+![Scroll endlessly](/res/multiple/multiple_q_loading.png)
 
 
-## View Selected Images in a Slideshow
-View the selected images (at least 2) in a slideshow or by scrolling horizontally.
+### View Selected Images in a Slideshow
+View selected images (at least 2) in a slideshow. The images change automatically every 3 seconds, or you can scroll them horizontally.
+![View selected images in a slideshow](/res/multiple/q_japan_selected_images.png)
 
----
+## Implementation Plan
 
 1. Designed the UI using Figma
 2. Implemented models, decoding strategies and tests to test the decoder
@@ -29,8 +32,6 @@ View the selected images (at least 2) in a slideshow or by scrolling horizontall
 9. Implemented the detail view controller to show all the selected images (view them by scrolling horizontally).
 10. Tested the application as a user and fixed a few minor bugs.
 
----
-
-## Wireframes in Figma
+## Initial Wireframes in Figma (Outdated)
 ![GridViewController](/res/GridViewController.png)
 ![DetailViewController](/res/DetailViewController.png)
