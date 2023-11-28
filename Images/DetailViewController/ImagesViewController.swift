@@ -5,6 +5,8 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
     var pageController: UIPageViewController!
     var imageControllers = [UIViewController]()
     
+    weak var timer: Timer?
+    
     var hits: [Hit]
     
     init(hits: [Hit]) {
@@ -14,6 +16,10 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
     
     required init?(coder: NSCoder) {
         fatalError("Not implemented")
+    }
+    
+    deinit {
+        timer?.invalidate()
     }
     
     override func viewDidLoad() {
@@ -28,6 +34,8 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
         }
         
         pageController.setViewControllers([imageControllers[0]], direction: .forward, animated: false)
+        
+        configureTimer()
         
     }
     
@@ -64,6 +72,20 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
         }
         
         imageControllers.append(imageController)
+    }
+    
+    private func configureTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { [weak self] _ in
+            
+            guard let self = self else { return }
+            
+            if let currentController = self.pageController.viewControllers?[0],
+               let index = self.imageControllers.firstIndex(of: currentController) {
+                
+                self.pageController.setViewControllers([self.imageControllers[(index+1) % self.imageControllers.count]], direction: .forward, animated: true)
+                
+            }
+        })
     }
     
 }
