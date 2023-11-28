@@ -16,6 +16,7 @@ Scroll endlessly without a hitch thanks to automatic content retrieval, asynchro
 
 ### View Selected Images in a Slideshow
 View selected images (at least 2) in a slideshow. The images change automatically every 3 seconds, or you can scroll them horizontally.
+
 ![View selected images in a slideshow](/res/multiple/q_japan_selected_images.png)
 
 ## Implementation Plan
