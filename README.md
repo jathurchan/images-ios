@@ -1,23 +1,31 @@
 # Images App (iOS)
 
-## Features
+## Problem
+
+Create an iOS app that enables users to search for images on Pixabay, select multiple images from the search results, scroll endlessly, and view the selected images in a slideshow.
+
+## Proposed Solution
 
 ### Search & Select Multiple Images
+
 Search for images using the Pixabay API, which gives you access to over 2 million images. Select as many images as you like from the search results.
 
 ![Search & select multiple images](/res/multiple/multiple_q_multiple_selected.png)
 
 
 ### Scroll Endlessly
+
 Scroll endlessly without a hitch thanks to automatic content retrieval, asynchronous image loading and caching.
 
 ![Scroll endlessly](/res/multiple/multiple_q_loading.png)
 
 
 ### View Selected Images in a Slideshow
+
 View selected images (at least 2) in a slideshow. The images change automatically every 3 seconds, or you can scroll them horizontally.
 
 ![View selected images in a slideshow](/res/multiple/q_japan_selected_images.png)
+
 
 ## Implementation Plan
 
