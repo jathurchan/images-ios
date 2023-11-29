@@ -10,7 +10,7 @@ extension ImageGridViewController {
             
             if let hit = self.hit(with: hitId) {
                 var contentConfiguration = cell.hitImageConfiguration()
-                contentConfiguration.image = hit.asset
+                contentConfiguration.image = ImageCache.placeholderImage
                 contentConfiguration.isSelected = cell.isSelected
                 
                 cell.contentConfiguration = contentConfiguration

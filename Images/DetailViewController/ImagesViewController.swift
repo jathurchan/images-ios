@@ -63,7 +63,7 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
             imageView.topAnchor.constraint(equalTo: imageController.view.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: imageController.view.bottomAnchor)])
         
-        imageView.image = hit.asset
+        imageView.image = ImageCache.placeholderImage
         
         ImageCache.shared.loadImage(url: hit.webFormat as NSURL, hitId: hit.id) { hitId, loadedImage in
             if let loadedImage {

@@ -3,7 +3,6 @@ import Foundation
 /// An enumeration that captures errors that may occur when
 /// data is loaded using the Pixabay API and decoded into
 /// an array of `Hit`. 
-///
 enum HitError: Error {
     
     /// An indication that some expected JSON properties

@@ -2,7 +2,7 @@ import UIKit
 import Foundation
 
 class ImageCache {
-    
+    public static let placeholderImage = UIImage()
     public static let shared = ImageCache()
     private let cachedImages = NSCache<NSURL, UIImage>()
     private var loadingResponses = [NSURL: [(Hit.ID, UIImage?) -> Void]]()

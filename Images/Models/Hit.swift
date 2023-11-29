@@ -2,7 +2,6 @@ import UIKit
 
 /// A model representing an image. It corresponds to a hit in
 /// the JSON response returned by Pixabay.
-///
 struct Hit: Identifiable {
     
     /// An identifier that uniquely identifies a `Hit`.
@@ -35,10 +34,8 @@ extension Hit: Decodable {
     
     /// Creates a new instance of `Hit` by decoding from the given decoder.
     ///
-    /// - parameter decoder: The decoder to read data from.
-    /// - throws: `HitError.missingData` if the expected JSON properties to
-    ///     create a `Hit` were not found.
-    ///     
+    /// - throws: `HitError.missingData` if the expected JSON
+    ///     properties to create a `Hit` were not found.
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let rawCode = try? values.decode(Int.self, forKey: .code)
@@ -68,7 +65,6 @@ extension [Hit] {
     /// - Parameter id: The id of the Hit for which we are looking for the index.
     /// - Returns: The index of the first Hit for which the id is the same as
     ///     `id`. If no Hits in the array has the same id as `id`, returns `nil`.
-    ///
     func indexOfHit(with id: Hit.ID) -> Self.Index? {
         return firstIndex(where: { $0.id == id })
     }
