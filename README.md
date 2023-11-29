@@ -50,7 +50,7 @@ View selected images (at least 2) in a slideshow. The images change automaticall
 
 - Fixed CPU usage by not updating `hitsStore` data during cell registration.
 
-### To Fix
+### Problems To Fix
 
 - **Fix Memory usage** (Caching without any limit): limit caching capacity using `totalCostLimit` and clear cache when performing a new query.
 
