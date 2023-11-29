@@ -44,6 +44,14 @@ View selected images (at least 2) in a slideshow. The images change automaticall
 - [x] Implement the `ImagesViewController` to show the selected images in a slideshow (enable manual scrolling horizontally).
 - [x] Test the application as a user, fix any bugs & monitor performance.
 
-## Initial Wireframes in Figma (Outdated)
+## Appendix
+
+## Fixed Problems
+
+- Fixed CPU usage by not updating `hitsStore` data during cell registration.
+
+- Fixed Memory usage
+
+### Initial UI design using Figma
 ![GridViewController](/res/GridViewController.png)
 ![DetailViewController](/res/DetailViewController.png)
