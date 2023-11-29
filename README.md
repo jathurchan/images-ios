@@ -29,17 +29,20 @@ View selected images (at least 2) in a slideshow. The images change automaticall
 
 ## Implementation Plan
 
-1. Designed the UI using Figma
-2. Implemented models, decoding strategies and tests to test the decoder
-3. Defined the `ImageGridViewController` using storyboard (main view controller with a search bar, collection view, and a toolbar).
-4. Implemented the collection view with custom layout and custom content view (for cell registration)
-5. Implemented a image loader (with caching)
-6. Implemented PixabayClient and HitProvider to provide data
-7. Enabled search and infinite scrolling (by fetching pages with scroll...)
-8. Implemented selecting and deselecting multiple images in the collection view
-8. Implemented toolbar with items that become active only in appropriate situations.
-9. Implemented the detail view controller to show all the selected images (view them by scrolling horizontally).
-10. Tested the application as a user and fixed a few minor bugs.
+- [x] Define the UI using Figma.
+- [x] Implement the models `Hit` and `PixabayJSON`, make them decodable and write unit tests to test the decoding.
+- [x] Create a `ImageGridViewController` class. Using a storyboard, Add a search bar, collection view and a toolbar to the root view controller. Add Auto Layout constraints using XCode. Connect the views to `ImageGridViewController`.
+- [x] Create a Playground. Perform GET requests using Pixabay API, testing a variety of query parameters. Retrieve sample data for `q = ""` and `per_page = 20`.
+- [x] Implement `ImageCache` to load images asychronously and cache them, using sample data URLs.
+- [x] Implement collection view (cell registration and snapshot) to display images using `ImageCache` and sample data.
+- [x] Implement `PixabayClient` to provide a method perform a specific query: `loadHits`
+- [x] Implement `HitProvider` to replace sample data. The class provides the `hits` array to read and 2 methods to update the `hits` array: `loadFirstPageData` and `loadNextPageData`.
+- [x] Enable search using the search bar
+- [x] Enable infinite scrolling
+- [x] Enable selecting and deselecting multiple images in the collection view
+- [x] Add `cancel` and `done` buttons and `# image(s) selected` label to the toolbar. Make them update whenever images are selected/deselected and new search query is performed.
+- [x] Implement the `ImagesViewController` to show the selected images in a slideshow (enable manual scrolling horizontally).
+- [x] Test the application as a user, fix any bugs & monitor performance.
 
 ## Initial Wireframes in Figma (Outdated)
 ![GridViewController](/res/GridViewController.png)
