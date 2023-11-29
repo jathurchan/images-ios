@@ -2,7 +2,6 @@ import Foundation
 
 /// A model representing the JSON response
 /// returned by Pixabay.
-///
 struct PixabayJSON: Decodable {
     
     /// The array of hits decoded from the JSON response

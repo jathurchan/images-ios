@@ -2,6 +2,8 @@ import Foundation
 
 let validStatus = 200...299
 
+/// A class that provides the method to load an array of `Hit`
+/// given a `query`, `page`, and `perPage` parameters.
 class PixabayClient {
     private static let apiKey = "18021445-326cf5bcd3658777a9d22df6f"
     private static let baseURL = URL(string: "https://pixabay.com/api/")!
