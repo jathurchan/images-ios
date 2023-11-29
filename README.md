@@ -46,12 +46,17 @@ View selected images (at least 2) in a slideshow. The images change automaticall
 
 ## Appendix
 
-## Fixed Problems
+### Fixed Problems
 
 - Fixed CPU usage by not updating `hitsStore` data during cell registration.
 
-- Fixed Memory usage
+### To Fix
+
+- **Fix Memory usage** (Caching without any limit): limit caching capacity using `totalCostLimit` and clear cache when performing a new query.
+
+![Memory Usage](/res/memory_usage.png)
 
 ### Initial UI design using Figma
+
 ![GridViewController](/res/GridViewController.png)
 ![DetailViewController](/res/DetailViewController.png)
