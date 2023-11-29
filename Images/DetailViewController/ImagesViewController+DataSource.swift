@@ -6,7 +6,7 @@ extension ImagesViewController: UIPageViewControllerDataSource {
             if index > 0 {
                 return imageControllers[index - 1]
             } else {
-                return imageControllers[imageControllers.count-1]
+                return imageControllers[imageControllers.count-1]   // Make it circular
             }
         }
         
@@ -18,7 +18,7 @@ extension ImagesViewController: UIPageViewControllerDataSource {
             if index < imageControllers.count - 1 {
                 return imageControllers[index + 1]
             } else {
-                return imageControllers[0]
+                return imageControllers[0]  // Make it circular
             }
         }
 

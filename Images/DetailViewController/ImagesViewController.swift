@@ -7,6 +7,7 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
     
     weak var timer: Timer?
     
+    /// The array of `Hit` represent the selected images.
     var hits: [Hit]
     
     init(hits: [Hit]) {
@@ -39,6 +40,8 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
         
     }
     
+    /// Configure hierarchy by adding the page controller as a child
+    /// Used VFL language to set up constraints
     private func configureHierarchy() {
         addChild(pageController)
         view.addSubview(pageController.view)
@@ -48,6 +51,8 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[pc]|", options: [], metrics: nil, views: views))
     }
     
+    /// Initialize a new image controller for the given `Hit`
+    /// representing one of the selected images
     private func createImageController(hit: Hit) {
         let imageController = UIViewController()
         let imageView = UIImageView()
@@ -63,9 +68,8 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
             imageView.topAnchor.constraint(equalTo: imageController.view.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: imageController.view.bottomAnchor)])
         
-        imageView.image = hit.asset
-        
-        ImageCache.shared.loadImage(url: hit.webFormat as NSURL, hitId: hit.id) { hitId, loadedImage in
+        imageView.image = ImageCache.placeholderImage
+        ImageCache.shared.loadImage(url: hit.webFormat as NSURL) { loadedImage in
             if let loadedImage {
                 imageView.image = loadedImage
             }
@@ -74,6 +78,7 @@ class ImagesViewController: UIViewController, UIPageViewControllerDelegate {
         imageControllers.append(imageController)
     }
     
+    /// Configure timer to move to next page controller regularly
     private func configureTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { [weak self] _ in
             

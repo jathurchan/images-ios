@@ -1,12 +1,16 @@
 import Foundation
 
+/// A class that manages the array of `Hit` that is associated with a search query.
 class HitProvider {
     private static let hitsToLoadPerPage = 100
     
-    var hits: [Hit] = []
+    /// An array of `Hit` currently loaded.
+    /// It is either updated by scrolling or performing a new query.
+    private(set) var hits: [Hit] = []
     
     private let client: PixabayClient
     
+    /// The task that is currently loading a new page of hits
     private var loadingPageTask: URLSessionDataTask?
     private var isLoadingNewPage: Bool { loadingPageTask != nil }
     private var canLoadNextPage: Bool = true
@@ -15,6 +19,7 @@ class HitProvider {
     private var pageToLoad: Int!
     private let perPage: Int = HitProvider.hitsToLoadPerPage
     
+    /// Loads the first page of hits for a given query
     func loadFirstPageData(for query: String = "", _ completion: @escaping ([Hit.ID], HitError?) -> Void) {
         
         guard self.query != query else {
@@ -32,9 +37,13 @@ class HitProvider {
         loadPageData(query: query, page: pageToLoad, perPage: HitProvider.hitsToLoadPerPage, completion)
     }
     
+    /// Loads the next page of hits if the next page is not
+    /// already being loaded, the next page exists and
+    /// `loadFirstPageData` was already called
     func loadNextPageData(_ completion: @escaping ([Hit.ID], HitError?) -> Void) {
         if !isLoadingNewPage && canLoadNextPage {
-            if let query,
+            
+            if let query,   // if loadFirstPageData was already called
                let pageToLoad {
                 loadPageData(query: query, page: pageToLoad, perPage: perPage, completion)
             }

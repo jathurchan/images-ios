@@ -39,6 +39,10 @@ class ImageGridViewController: UIViewController {
         configureToolbar()
     }
     
+    /// Creates the layout for the collection view
+    /// It is as follows:
+    ///     (1) large image + (2 small images)
+    ///     (2) (2 small images) + large image
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -80,6 +84,7 @@ class ImageGridViewController: UIViewController {
         return layout
     }
     
+    /// Creates the toolbar with the initial state
     private func configureToolbar() {
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didPressCancelButton))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -90,7 +95,70 @@ class ImageGridViewController: UIViewController {
         
         updateToolbarButtons()
     }
+}
+
+// MARK: UICollectionViewDelegate
+extension ImageGridViewController: UICollectionViewDelegate {
     
+    /// Loads next page and updates the array of `Hit` in `hitsStore` as soon as
+    /// the user has scrolled far enough and updates asynchronously the snapshot to
+    /// update the collection view
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= (scrollView.contentSize.height - 3 * scrollView.frame.size.height) {
+            hitsStore.loadNextPageData { [unowned self] hitsIds, hitError in
+                self.updateSnapshot(reloading: hitsIds)
+            }
+        }
+    }
+    
+    /// Updates snapshot to show the selection and updates the toolbar
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let hitId = self.dataSource.itemIdentifier(for: indexPath) {
+            self.updateSnapshot(reloading: [hitId])
+        }
+        
+        updateToolbarButtons()
+    }
+    
+    /// Updates snapshot to show the deselection and updates the toolbar
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+        if let hitId = self.dataSource.itemIdentifier(for: indexPath) {
+            self.updateSnapshot(reloading: [hitId])
+        }
+        
+        updateToolbarButtons()
+    }
+}
+
+// MARK: UISearchBarDelegate
+extension ImageGridViewController: UISearchBarDelegate {
+    
+    /// Initiates a new search
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text = searchBar.text {
+            clearSelectedItems(animated: false)
+            updateToolbarButtons()
+            
+            hitsStore.loadFirstPageData(for: text) { [unowned self] hitsIds, hitError in
+                self.updateSnapshot(reloading: hitsIds)
+            }
+        }
+        self.searchBar.endEditing(true)
+        scrollToTop()
+    }
+    
+    private func scrollToTop() {
+        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+    }
+}
+
+// MARK: Utilities
+extension ImageGridViewController {
+    
+    /// Updates the toolbar according to the number of images
+    /// currently selected in the collection view
     func updateToolbarButtons() {
         let selectedLabel = UILabel()
         selectedLabel.font = .preferredFont(forTextStyle: .headline)
@@ -119,50 +187,8 @@ class ImageGridViewController: UIViewController {
         
         toolBar.items?[selectedLabelButton].customView = selectedLabel
     }
-}
-
-extension ImageGridViewController: UICollectionViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y >= (scrollView.contentSize.height - 3 * scrollView.frame.size.height) {
-            hitsStore.loadNextPageData { [unowned self] hitsIds, hitError in
-                self.updateSnapshot(reloading: hitsIds)
-            }
-        }
-    }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if let hitId = self.dataSource.itemIdentifier(for: indexPath) {
-            self.updateSnapshot(reloading: [hitId])
-        }
-        
-        updateToolbarButtons()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
-        if let hitId = self.dataSource.itemIdentifier(for: indexPath) {
-            self.updateSnapshot(reloading: [hitId])
-        }
-        
-        updateToolbarButtons()
-    }
-}
-
-extension ImageGridViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text {
-            clearSelectedItems(animated: false)
-            updateToolbarButtons()
-            
-            hitsStore.loadFirstPageData(for: text) { [unowned self] hitsIds, hitError in
-                self.updateSnapshot(reloading: hitsIds)
-            }
-        }
-        self.searchBar.endEditing(true)
-        scrollToTop()
-    }
-    
+    /// Deselect all the selected images and update the snapshot
     func clearSelectedItems(animated: Bool = false) {
         if let indexPaths = collectionView.indexPathsForSelectedItems {
             indexPaths.forEach { (indexPath) in
@@ -170,9 +196,5 @@ extension ImageGridViewController: UISearchBarDelegate {
             }
             self.updateSnapshot(reloading: indexPaths.compactMap { self.dataSource.itemIdentifier(for: $0) })
         }
-    }
-    
-    private func scrollToTop() {
-        collectionView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
     }
 }

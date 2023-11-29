@@ -42,7 +42,7 @@ class HitImageContentView: UIView, UIContentView {
             selectedImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             selectedImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
             selectedImageView.heightAnchor.constraint(equalTo: selectedImageView.widthAnchor),
-            selectedImageView.heightAnchor.constraint(equalToConstant: 20) // TODO: Update
+            selectedImageView.heightAnchor.constraint(equalToConstant: 20)
         ])
         
     }
@@ -64,7 +64,6 @@ extension UICollectionViewCell {
         HitImageContentView.Configuration()
     }
 }
-
 
 extension UIContentConfiguration {
     func updated(for state: UIConfigurationState) -> Self {

@@ -1,19 +1,27 @@
 import UIKit
 
+/// A model representing an image. It corresponds to a hit in
+/// the JSON response returned by Pixabay.
 struct Hit: Identifiable {
-    let id: UUID = UUID()
-    let code: Int
-    let preview: URL
-    let webFormat: URL
-    let user: String
     
-    var asset = UIImage()
-}
-
-extension [Hit] {
-    func indexOfHit(with id: Hit.ID) -> Self.Index? {
-        return firstIndex(where: { $0.id == id })
-    }
+    /// An identifier that uniquely identifies a `Hit`.
+    let id: UUID = UUID()
+    
+    /// An integer corresponding to the hit id in the
+    /// JSON response returned by Pixabay.
+    let code: Int
+    
+    /// A URL for the low resolution image with a
+    /// maximum width or height of 150 px.
+    let preview: URL
+    
+    /// A URL for the medium sized image with a
+    /// maximum width or height of 640 px, valid
+    /// for just 24 hours.
+    let webFormat: URL
+    
+    /// User name of the contributor.
+    let user: String
 }
 
 extension Hit: Decodable {
@@ -24,6 +32,10 @@ extension Hit: Decodable {
         case user = "user"
     }
     
+    /// Creates a new instance of `Hit` by decoding from the given decoder.
+    ///
+    /// - throws: `HitError.missingData` if the expected JSON
+    ///     properties to create a `Hit` were not found.
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let rawCode = try? values.decode(Int.self, forKey: .code)
@@ -44,4 +56,17 @@ extension Hit: Decodable {
         self.webFormat = image
         self.user = user
     }
+}
+
+extension [Hit] {
+    
+    /// Returns the first index in which the hit id matches the given id.
+    ///
+    /// - Parameter id: The id of the Hit for which we are looking for the index.
+    /// - Returns: The index of the first Hit for which the id is the same as
+    ///     `id`. If no Hits in the array has the same id as `id`, returns `nil`.
+    func indexOfHit(with id: Hit.ID) -> Self.Index? {
+        return firstIndex(where: { $0.id == id })
+    }
+    
 }
