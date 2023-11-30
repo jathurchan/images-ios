@@ -28,6 +28,11 @@ class ImageGridViewController: UIViewController {
         configureDataSource()
         
         hitsStore.loadFirstPageData { [unowned self] hitIds, hitError in
+            
+            if let hitError {
+                handleHitError(hitError)
+            }
+            
             updateSnapshot()
         }
         
@@ -106,6 +111,11 @@ extension ImageGridViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.y >= (scrollView.contentSize.height - 3 * scrollView.frame.size.height) {
             hitsStore.loadNextPageData { [unowned self] hitsIds, hitError in
+                
+                if let hitError {
+                    handleHitError(hitError)
+                }
+                
                 self.updateSnapshot(reloading: hitsIds)
             }
         }
@@ -195,6 +205,17 @@ extension ImageGridViewController {
                 collectionView.deselectItem(at: indexPath, animated: animated)
             }
             self.updateSnapshot(reloading: indexPaths.compactMap { self.dataSource.itemIdentifier(for: $0) })
+        }
+    }
+    
+    func handleHitError(_ error: HitError) {
+        switch error {
+        case .missingData:
+            fatalError("Handle error when decoding failed")
+        case .networkError:
+            fatalError("Handle error when response unsuccessful")
+        case .unexpectedError(_):
+            fatalError("Handle any unexpected errors")
         }
     }
 }
