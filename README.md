@@ -44,6 +44,7 @@ View selected images (at least 2) in a slideshow. The images change automaticall
 - [x] Implement the `ImagesViewController` to show the selected images in a slideshow (enable manual scrolling horizontally). Apply Auto Layout constraints programmatically (_used NSLayoutConstraint.activate([]) and VFL_) 
 - [x] Test the application as a user, fix any bugs & monitor performance.
 - [x] Add comments
+- [x] Handle errors when loading `Hit` data from Pixabay
 - [ ] Show errors using alert controllers
 - [ ] Better handle caching images (limit memory usage)
 
