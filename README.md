@@ -47,6 +47,7 @@ View selected images (at least 2) in a slideshow. The images change automaticall
 - [x] Handle errors when loading `Hit` data from Pixabay
 - [ ] Show errors using alert controllers
 - [ ] Better handle caching images (limit memory usage)
+- [ ] Make the app more accessible
 
 ## Appendix
 
