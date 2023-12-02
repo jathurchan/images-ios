@@ -1,7 +1,7 @@
 # Images App (iOS)
 
 - **Skills**: `iOS Development`, `Swift`, `UIKit`, `Foundation`, `XCTest` (`Unit Testing`), `Performance Benchmarking`
-- **Timeline**: **`3 days`**
+- **Timeline**: `11/22/23 - 11/24/23` (`3 days`)
 
 ## Background
 
