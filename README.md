@@ -48,17 +48,17 @@ View selected images (at least 2) in a slideshow. The images change automaticall
 
 ## Next Steps
 
-- [] Make the app accessible (add play/pause and close buttons in `ImagesViewController`...)
-- [] Handle errors with alert view controllers to alert users of any failures (network connection...)
-- [] **Fix Memory usage** (Caching without any limit): limit caching capacity using `totalCostLimit` and clear cache when performing a new query.
+- [ ] Make the app accessible (add play/pause and close buttons in `ImagesViewController`...)
+- [ ] Handle errors with alert view controllers to alert users of any failures (network connection...)
+- [ ] **Fix Memory usage** (Caching without any limit): limit caching capacity using `totalCostLimit` and clear cache when performing a new query.
 
 Each step corresponds to a scroll with new images being fetched to fill and cached:
 ![Memory Usage](/res/memory_usage.png)
 
-- [] Do not define the constants in the middle of the code (c.f. `ImageGridViewController.createLayout()`)
-- [] Make `PixabayClient.loadHits()` better testable (using dependency injection for `URLSession`...)
-- [] Remove duplicate code in `ImageGridViewController`
-- [] Improve comments
+- [ ] Do not define the constants in the middle of the code (c.f. `ImageGridViewController.createLayout()`)
+- [ ] Make `PixabayClient.loadHits()` better testable (using dependency injection for `URLSession`...)
+- [ ] Remove duplicate code in `ImageGridViewController`
+- [ ] Improve comments
 
 
 ### Initial UI design using Figma
