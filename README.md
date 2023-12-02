@@ -1,8 +1,15 @@
 # Images App (iOS)
 
-## Problem
+- **Skills**: `iOS Development`, `Swift`, `UIKit`, `Foundation`, `XCTest` (`Unit Testing`), `Performance Benchmarking`
+- **Timeline**: **`3 days`**
 
-Create an iOS app that enables users to search for images on Pixabay, select multiple images from the search results, scroll endlessly, and view the selected images in a slideshow.
+## Background
+
+Pixabay is a popular stock photo and video website that offers a vast collection of free high-quality images and videos. With over 2.4 million users and over 2.7 million images, Pixabay has become a go-to resource for creatives and individuals seeking royalty-free visual content.
+
+## Problem Statement
+
+Create an iOS app that enables users to search for images, select multiple images from the search results, scroll endlessly through search results, and view the selected images in a slideshow format.
 
 ## Proposed Solution
 
@@ -60,6 +67,7 @@ Each step corresponds to a scroll with new images being fetched to fill and cach
 - [ ] Remove duplicate code in `ImageGridViewController`
 - [ ] Improve comments
 
+## Appendix
 
 ### Initial UI design using Figma
 
