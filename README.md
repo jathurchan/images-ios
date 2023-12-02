@@ -9,7 +9,7 @@ Pixabay is a popular stock photo and video website that offers a vast collection
 
 ## Problem Statement
 
-Create an iOS app that enables users to search for images, select multiple images from the search results, scroll endlessly through search results, and view the selected images in a slideshow format.
+Create an iOS app that enables users to search for images on Pixabay, select multiple images from the search results, scroll endlessly through search results, and view the selected images in a slideshow format.
 
 ## Proposed Solution
 
